@@ -1,17 +1,15 @@
 import numpy as np
 from stl import mesh
 from model.li_stl import LI_STL
-
-
-
-
+import sys
 
 
 if __name__ == "__main__":
-    file_name = "8.stl"
-    stl = LI_STL(file_name)
+    if len(sys.argv) == 3:
+        file_name = sys.argv[1]
+        conversion = sys.argv[2]
 
-    print('z', stl.max_z)
-    print('x', stl.min_x, stl.max_x)
-    print('y', stl.min_y, stl.max_y)
-    print('verts', len(stl.verts))
+        stl = LI_STL(file_name)
+        print(stl.mesh.points[0][0])
+        stl.convert_verts(conversion)
+        print(stl.mesh.points[0][0])
