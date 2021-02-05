@@ -1,5 +1,5 @@
 import numpy as np
-from stl import mesh
+from stl import mesh, base
 
 class LI_STL:
     def __init__(self, file_name):
@@ -7,10 +7,8 @@ class LI_STL:
 
 
     def test(self):
-        for i in self.mesh.points:
-            for j in i:
-                print(j)
-
+        print(self.mesh.data[0])
+        print(len(self.mesh.data[0]))
     def convert_verts(self, conversion):
         conversion_factor = 1.0
 
@@ -25,11 +23,12 @@ class LI_STL:
         else:
             return
 
-        list_of_triangles = []
-        for point in self.mesh.points:
-            vertex_of_triangle = []
+        list_of_triangles = np.zeros(len(self.mesh.data), dtype=base.BaseMesh.dtype)
+        for point in self.mesh.data:
+            vertex_of_triangle = np.zeros(3, dtype=base.BaseMesh.dtype)
             for i in point:
-                vertex_of_triangle.append(i * conversion_factor)
-            list_of_triangles.append(vertex_of_triangle)
+                vertex_of_triangle = np.append(vertex_of_triangle, i)
+            list_of_triangles = np.vstack([list_of_triangles, vertex_of_triangle])
 
-        self.mesh.points = list_of_triangles
+        self.mesh.data = list_of_triangles
+        self.mesh.update_normals()

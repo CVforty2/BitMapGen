@@ -10,6 +10,9 @@ if __name__ == "__main__":
         conversion = sys.argv[2]
 
         stl = LI_STL(file_name)
+
+        # stl.test()
+
         print(stl.mesh.points[0][0])
         stl.convert_verts(conversion)
         print(stl.mesh.points[0][0])
