@@ -11,8 +11,18 @@ if __name__ == "__main__":
 
         stl = LI_STL(file_name)
 
-        # stl.test()
+        # print(type(stl.stl_mesh.data))
+        # print()
+        # print(stl.stl_mesh.data)
+        # print()
+        #
+        # print(len(stl.stl_mesh.data['vectors']))
+        # print(type(stl.stl_mesh.data['vectors']))
+        # print()
+        # print(stl.stl_mesh.data['vectors'][0])
+        # print()
+        # print(stl.stl_mesh.data['vectors'][0][0])
+        # print()
+        # print(stl.stl_mesh.data['vectors'][0][0][0])
 
-        print(stl.mesh.points[0][0])
         stl.convert_verts(conversion)
-        print(stl.mesh.points[0][0])

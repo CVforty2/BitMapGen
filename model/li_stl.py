@@ -1,14 +1,13 @@
 import numpy as np
 from stl import mesh, base
+import pprint
 
 class LI_STL:
     def __init__(self, file_name):
-        self.mesh = mesh.Mesh.from_file(file_name)
+        self.stl_mesh = mesh.Mesh.from_file(file_name)
 
 
-    def test(self):
-        print(self.mesh.data[0])
-        print(len(self.mesh.data[0]))
+
     def convert_verts(self, conversion):
         conversion_factor = 1.0
 
@@ -23,12 +22,14 @@ class LI_STL:
         else:
             return
 
-        list_of_triangles = np.zeros(len(self.mesh.data), dtype=base.BaseMesh.dtype)
-        for point in self.mesh.data:
-            vertex_of_triangle = np.zeros(3, dtype=base.BaseMesh.dtype)
-            for i in point:
-                vertex_of_triangle = np.append(vertex_of_triangle, i)
-            list_of_triangles = np.vstack([list_of_triangles, vertex_of_triangle])
+        list = self.stl_mesh.data.copy()
 
-        self.mesh.data = list_of_triangles
-        self.mesh.update_normals()
+        for i in range(len(list)):
+            list[i][1][0][0:3] *= conversion_factor
+            list[i][1][1][0:3] *= conversion_factor
+            list[i][1][2][0:3] *= conversion_factor
+
+        data = np.asarray(list, dtype=mesh.Mesh.dtype)
+        new_mesh = mesh.Mesh(data)
+        print(new_mesh.max_)
+        new_mesh.save(f'new_stl.stl')
