@@ -1,6 +1,6 @@
 import numpy as np
 from stl import mesh
-from model.li_stl import LI_STL
+from model.stl_c import STL
 import sys
 
 
@@ -9,7 +9,7 @@ if __name__ == "__main__":
         file_name = sys.argv[1]
         conversion = sys.argv[2]
 
-        stl = LI_STL(file_name)
+        stl = STL(file_name)
 
         # print(type(stl.stl_mesh.data))
         # print()

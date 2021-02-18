@@ -2,7 +2,7 @@ import numpy as np
 from stl import mesh, base
 import pprint
 
-class LI_STL:
+class STL:
     def __init__(self, file_name):
         self.stl_mesh = mesh.Mesh.from_file(file_name)
 
@@ -31,5 +31,4 @@ class LI_STL:
 
         data = np.asarray(list, dtype=mesh.Mesh.dtype)
         new_mesh = mesh.Mesh(data)
-        print(new_mesh.max_)
         new_mesh.save(f'new_stl.stl')
