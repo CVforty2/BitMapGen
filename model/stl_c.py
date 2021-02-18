@@ -9,6 +9,12 @@ class STL:
 
 
     def convert_verts(self, conversion):
+        """
+        converion -> conversion factor for measurement
+
+
+        Creates new STL file based on conversion parameter
+        """
         conversion_factor = 1.0
 
         if conversion == "in2cm":
